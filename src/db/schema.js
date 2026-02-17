@@ -1,5 +1,5 @@
 import { intersect } from 'drizzle-orm/gel-core';
-import {pgEnum, pgTable, serial, text, timestamp, integer, pgEnum, jsonb } from 'drizzle-orm/pg-core'; 
+import {pgEnum, pgTable, serial, text, timestamp, integer, jsonb } from 'drizzle-orm/pg-core'; 
 
 export const matchStatusEnums = pgEnum('match_status',['scheduled', 'live', 'finished']); 
 
