@@ -19,7 +19,9 @@ export function attachWebSocketServer(server) {
         server,
         path: "/ws",
         maxPayload: 1024 * 1024,
-    });
+    }); 
+
+    const broadcastMatchCreated = (payload) => broadcast(wss,payload);
 
     // Handle new connections
     wss.on("connection", (socket) => {
@@ -42,6 +44,7 @@ export function attachWebSocketServer(server) {
             if (!ws.isAlive) {
                 return ws.terminate();
             }
+            if (ws.readyState !== WebSocket.OPEN) return; 
 
             ws.isAlive = false;
             ws.ping();
@@ -53,5 +56,5 @@ export function attachWebSocketServer(server) {
         clearInterval(interval);
     });
 
-    return wss;
+    return { wss, broadcastMatchCreated };
 }
